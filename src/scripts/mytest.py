@@ -8,4 +8,4 @@ if(user == "hagia-sophia"):
 elif(user == "singhanu"):
 	sys.path.append('/home/singhanu/Documents/SchNOrb/src')
 
-import schorb.data as data
+import schnorb.data as data
