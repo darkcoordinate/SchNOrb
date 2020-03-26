@@ -645,7 +645,10 @@ class OrcaFormatter:
         return vector
 
     def _format_matrix(self, parsed):
-
+        print("&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+        for i in parsed :
+            print(i)
+        print("&&&&&&&&&&&&&&&&&&&&&&&&&&&")
         n_entries = len(parsed[1].split())
 
         self.matrix_dim = int(parsed[-1].split()[0]) + 1
@@ -785,13 +788,14 @@ class OrcaDataParser(OrcaOutputParser):
                         '***RMSP convergence achieved***',
                         '***MAXP convergence achieved***',
                         '***Gradient convergence achieved***',
+                        '***DIIS convergence achieved***',
                         '***Orbital Rotation convergence achieved***',
                         '**** Energy Check signals convergence ****'],
         'overlap': ['DFT GRID GENERATION', 'INITIAL GUESS: MOREAD'],
         'atoms': 'CARTESIAN COORDINATES (A.U.)',
         'basis': ['ORCA GTO INTEGRAL CALCULATION', 'AUXILIARY BASIS SET INFORMATION',
                   'Checking for AutoStart:'],
-        'forces': 'Difference to translation invariance:',
+        'forces': ['Difference to translation invariance:','Norm of the cartesian gradient'],
         'energy': None
     }
 
