@@ -16,6 +16,12 @@ from schnorb.utils import check_nan_np
 
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 
+def log(log):
+    print("*****************************")
+    print("=============================")
+    print(log)
+    print("=============================")
+    print("*****************************")
 
 def extract_basis_definition_aims(output_dirs):
     """
@@ -137,7 +143,7 @@ class HamiltonianParser:
         prop_buffer = []
 
         for path in tqdm(sorted(data_dirs), ncols=120):
-
+            #print(path)
             if os.path.exists(path):
                 logging.debug('Reading data: ' + path)
                 atoms, properties = self.parse_molecule(path)
@@ -210,7 +216,8 @@ class HamiltonianParser:
         # parse everything
         matrices = self._parse_matrices(path, atoms)
         H, S = matrices[0], matrices[1]
-
+        #for j in H:
+            #print(j)
         properties = {
             'hamiltonian': H.astype(np.float32),
             'overlap': S.astype(np.float32),
@@ -391,7 +398,7 @@ class AimsHamiltonianParser(HamiltonianParser):
 
         H = np.zeros((size, size))
         S = np.zeros((size, size))
-
+        print(H)
         H[mu, nu] = Hraw[:, 2]
         H[nu, mu] = Hraw[:, 2]
         S[mu, nu] = Sraw[:, 2]
@@ -466,7 +473,7 @@ class AimsHamiltonianParser(HamiltonianParser):
 
 
 class OrcaHamiltonianParser(HamiltonianParser):
-    file_endings = ['.log']
+    file_endings = ['.log','.out']
 
     def __init__(self, dbpath, basis_definition, orbital_energies=None,
                  check_convergence=False, min_dist=None,
@@ -497,7 +504,6 @@ class OrcaHamiltonianParser(HamiltonianParser):
 
         # Read file and populate parser
         self.orca_parser.parse_file(path)
-
         atypes, coords = self.orca_parser.get_parsed()['atoms']
         atoms = Atoms(atypes, coords)
 
@@ -620,6 +626,8 @@ class OrcaFormatter:
         elif self.datatype == 'vector':
             formatted = self._format_vector(parsed)
         elif self.datatype == 'matrix':
+            for i in parsed:
+                print(i)
             formatted = self._format_matrix(parsed)
         elif self.datatype == 'basis':
             formatted = self._format_basis(parsed)
@@ -645,24 +653,36 @@ class OrcaFormatter:
         return vector
 
     def _format_matrix(self, parsed):
-        print("&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-        for i in parsed :
-            print(i)
-        print("&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+        #for i in parsed:
+           # print(i)
+        #log("printing parse")
+        #for i in parsed:
+            #print(i)
+        #log("printing parsed end")
         n_entries = len(parsed[1].split())
 
         self.matrix_dim = int(parsed[-1].split()[0]) + 1
+        #log("matrix_dim")
+        #print(self.matrix_dim)
 
         subdata = [parsed[i:i + self.matrix_dim + 1] for i in
                    range(0, len(parsed), self.matrix_dim + 1)]
-
+        #log("subdata")
+        #for i in subdata:
+            #print(i)
+        #log("subdata printed")
         matrix = [[] for _ in range(self.matrix_dim)]
-
+        #log("entry")
         for block in subdata:
             for i, entry in enumerate(block[1:]):
+                #print(entry)
                 matrix[i] += [float(x) for x in entry.split()[1:]]
-
+        #log("entry ended")
+        for i in range(len(matrix)):
+            matrix[i] = np.array(matrix[i])
         matrix = np.array(matrix)
+        #print("\n\n\n\n\n\n")
+        #print(matrix)
         return matrix
 
     def _format_basis(self, parsed):

@@ -18,11 +18,13 @@ name = []
 for i in range(100):
 	name.append("/home/hagia-sophia/orca_dft/test_%d.out"%(i))
 
-#l = data.extract_basis_definition_orca(name)
+l = data.extract_basis_definition_orca(name)
 #print(len(l[0]))
 
 k = data.OrcaDataParser()
 
-print(k)
 k.parse_file(name[0])
-print(k.parsed)
+
+
+#s = data.OrcaHamiltonianParser("f1.db",l[0])
+#s.parse_directories(name)
