@@ -2,14 +2,23 @@ import logging
 import os
 
 import numpy as np
+print("numpy loaded ....")
 import torch
+print("torch loaded ....")
 from ase import Atoms
+print("ase.atom loaded ....")
 from ase.data import atomic_numbers
+print("ase.data.atomic_numbers loaded ....")
 from ase.io import read
+print("ase.io loaded ....")
 from ase.units import Ha, Bohr
+print("ase.unit loaded ....")
 from tqdm import tqdm
+print("tqdm loaded ....")
 
 import schnetpack as spk
+print("schnetpack loaded ....")
+print("loading Schnorb library")
 from schnorb import SchNOrbProperties
 from schnorb.rotations import OrcaRotator, rand_rotation_matrix
 from schnorb.utils import check_nan_np
@@ -898,6 +907,7 @@ class OrcaPropertyParser:
         if self.formatters is None:
             return self.parsed
         elif hasattr(self.formatters, '__iter__'):
+            log("")
             return [formatter.format(self.parsed) for formatter in
                     self.formatters]
         else:
