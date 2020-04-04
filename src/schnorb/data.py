@@ -907,7 +907,9 @@ class OrcaPropertyParser:
         if self.formatters is None:
             return self.parsed
         elif hasattr(self.formatters, '__iter__'):
-            log("")
+            log("formatter")
+            for i in self.formatters:
+                print(i)
             return [formatter.format(self.parsed) for formatter in
                     self.formatters]
         else:
