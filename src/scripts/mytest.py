@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/home/singhanu/anaconda3/bin/python
 import sys
 import getpass
 print(sys.executable)
