@@ -582,10 +582,9 @@ class OrcaOutputParser:
 
         with open(path, 'r') as f:
             for line in f:
+                print(line)
                 for parser in self.parsers:
                     self.parsers[parser].parse_line(line)
-
-        print(self.parsers["hamiltonian"].parsed)
 
         self.parsed = {}
 
