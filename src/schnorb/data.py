@@ -597,10 +597,10 @@ class OrcaOutputParser:
         for parser in self.parsers:
             self.parsed[parser] = self.parsers[parser].get_parsed()
 
-        for i in self.parsers:
-            print(i)
-            for j in self.parsed[i] :
-                print(j)
+        #for i in self.parsers:
+            #print(i)
+            #for j in self.parsed[i] :
+                #print(j)
 
     def get_parsed(self):
         """

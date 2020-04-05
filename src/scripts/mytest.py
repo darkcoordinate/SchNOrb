@@ -22,7 +22,11 @@ for i in range(100):
 	name.append(work_path+"/test_%d.out"%(i))
 
 
-#print(len(l[0]))
+
+l = data.extract_basis_definition_orca([name[0]])
+print(l)
+
+
 print(name[0])
 k = data.OrcaDataParser()
 
