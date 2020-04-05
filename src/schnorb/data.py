@@ -585,6 +585,8 @@ class OrcaOutputParser:
                 for parser in self.parsers:
                     self.parsers[parser].parse_line(line)
 
+        print(self.parsers)
+
         self.parsed = {}
 
         for parser in self.parsers:
