@@ -583,18 +583,18 @@ class OrcaOutputParser:
         for parser in self.parsers:
             self.parsers[parser].reset()
 
-        f = open(path,"r").read().split("\n")
-        for parser in self.parsers:
-            parse_info = grep(f,self.parsers[parser].start)
-            print(parser, parse_info)
-        #with open(path, 'r') as f:
-            #for line in f:
-                #for parser in self.parsers:
-                    #if(parser == "hamiltonian"):
-                        #self.parsers[parser].parse_line(line,callopt=1)
-                    #else:
-                        #self.parsers[parser].parse_line(line)
-
+        #f = open(path,"r").read().split("\n")
+        #for parser in self.parsers:
+        #    parse_info = grep(f,self.parsers[parser].start)
+        #    print(parser, parse_info)
+        with open(path, 'r') as f:
+            for line in f:
+                for parser in self.parsers:
+                    if(parser == "hamiltonian"):
+                        self.parsers[parser].parse_line(line,callopt=1)
+                    else:
+                        self.parsers[parser].parse_line(line)
+        print(self.parsers["hamiltonian"].parsed)
         self.parsed = {}
 
         for parser in self.parsers:
