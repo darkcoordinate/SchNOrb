@@ -591,19 +591,14 @@ class OrcaOutputParser:
             for line in f:
                 for parser in self.parsers:
                     self.parsers[parser].parse_line(line)
-        log("hamiltonian")
-        for i in self.parsers["hamiltonian"].parsed:
-            print(i)
-        log("hamiltonian End")
         
-        log("hamiltonian1")
-        for i in self.parsers["hamiltonian1"].parsed:
-            print(i)
-        log("hamiltonian1 End")
         self.parsed = {}
 
         for parser in self.parsers:
             self.parsed[parser] = self.parsers[parser].get_parsed()
+
+        for i in self.parsed:
+            print(i)
 
     def get_parsed(self):
         """
