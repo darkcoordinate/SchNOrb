@@ -590,12 +590,14 @@ class OrcaOutputParser:
         with open(path, 'r') as f:
             for line in f:
                 for parser in self.parsers:
-                    if(parser == "hamiltonian"):
-                        self.parsers[parser].parse_line(line,callopt=1)
-                    else:
-                        self.parsers[parser].parse_line(line)
+                    self.parsers[parser].parse_line(line)
         log("hamiltonian")
         for i in self.parsers["hamiltonian"].parsed:
+            print(i)
+        log("hamiltonian End")
+
+         log("hamiltonian")
+        for i in self.parsers["hamiltonian1"].parsed:
             print(i)
         log("hamiltonian End")
         self.parsed = {}
