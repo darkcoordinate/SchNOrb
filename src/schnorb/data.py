@@ -582,9 +582,11 @@ class OrcaOutputParser:
 
         with open(path, 'r') as f:
             for line in f:
-                print(line)
                 for parser in self.parsers:
-                    self.parsers[parser].parse_line(line)
+                    if(parser == "hamiltonian"):
+                        self.parsers[parser].parse_line(line,callopt=1)
+                    else:
+                        self.parsers[parser].parse_line(line)
 
         self.parsed = {}
 
@@ -869,13 +871,18 @@ class OrcaPropertyParser:
         self.read = False
         self.parsed = None
 
-    def parse_line(self, line):
+
+
+
+    def parse_line(self, line, callopt=None):
         """
         Parses a line in the output file and updates Parser.
 
         Args:
             line (str): line of Orca output file
         """
+        if(callopt == 1):
+            print(line)
         line = line.strip()
         if line.startswith("---------") or len(line) == 0:
             pass
