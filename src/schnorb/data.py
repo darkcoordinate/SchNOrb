@@ -817,6 +817,7 @@ class OrcaDataParser(OrcaOutputParser):
     """
     starts = {
         'hamiltonian': 'Fock matrix for operator 0',
+        'hamiltonian1': 'Fock matrix for operator 1',
         'overlap': 'OVERLAP MATRIX',
         'atoms': 'CARTESIAN COORDINATES (ANGSTROEM)',
         'basis': 'BASIS SET IN INPUT FORMAT',
@@ -832,7 +833,9 @@ class OrcaDataParser(OrcaOutputParser):
                         '***Gradient convergence achieved***',
                         '***DIIS convergence achieved***',
                         '***Orbital Rotation convergence achieved***',
+                        'Fock matrix for operator 1',
                         '**** Energy Check signals convergence ****'],
+        'hamiltonian1' : '***DIIS convergence achieved***',
         'overlap': ['DFT GRID GENERATION', 'INITIAL GUESS: MOREAD'],
         'atoms': 'CARTESIAN COORDINATES (A.U.)',
         'basis': ['ORCA GTO INTEGRAL CALCULATION', 'AUXILIARY BASIS SET INFORMATION',
@@ -843,6 +846,7 @@ class OrcaDataParser(OrcaOutputParser):
 
     formatters = {
         'hamiltonian': OrcaFormatter(None, datatype='matrix'),
+        'hamiltonian1': OrcaFormatter(None, datatype='matrix'),
         'overlap': OrcaFormatter(None, datatype='matrix'),
         'atoms': (
             OrcaFormatter(0, converter=str), OrcaFormatter(1, stop=4)
@@ -853,7 +857,7 @@ class OrcaDataParser(OrcaOutputParser):
     }
 
     def __init__(self,
-                 properties=['hamiltonian', 'overlap', 'atoms', 'energy', 'forces']):
+                 properties=['hamiltonian','hamiltonian1', 'overlap', 'atoms', 'energy', 'forces']):
         parsers = {p: OrcaPropertyParser(self.starts[p], self.stops[p],
                                          formatters=self.formatters[p]) for p
                    in
