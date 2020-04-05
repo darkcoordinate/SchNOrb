@@ -32,6 +32,9 @@ def log(log):
     print("=============================")
     print("*****************************")
 
+def grep(l,s):
+    return [[i,l[i]]  for i in range(len(l)) if s in l[i]]
+
 def extract_basis_definition_aims(output_dirs):
     """
     Format: orb_idx,type,n,l,m
@@ -580,13 +583,17 @@ class OrcaOutputParser:
         for parser in self.parsers:
             self.parsers[parser].reset()
 
-        with open(path, 'r') as f:
-            for line in f:
-                for parser in self.parsers:
-                    if(parser == "hamiltonian"):
-                        self.parsers[parser].parse_line(line,callopt=1)
-                    else:
-                        self.parsers[parser].parse_line(line)
+        f = open(path,"r").read().split("\n")
+        for parser in self.parsers:
+            parse_info = grep(f,self.parsers[parser].start)
+            print(parser, parse_info)
+        #with open(path, 'r') as f:
+            #for line in f:
+                #for parser in self.parsers:
+                    #if(parser == "hamiltonian"):
+                        #self.parsers[parser].parse_line(line,callopt=1)
+                    #else:
+                        #self.parsers[parser].parse_line(line)
 
         self.parsed = {}
 
