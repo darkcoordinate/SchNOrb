@@ -585,7 +585,8 @@ class OrcaOutputParser:
                 for parser in self.parsers:
                     self.parsers[parser].parse_line(line)
 
-        print(self.parsers)
+        for i in self.parsers:
+            print(i)
 
         self.parsed = {}
 
@@ -637,8 +638,8 @@ class OrcaFormatter:
         elif self.datatype == 'vector':
             formatted = self._format_vector(parsed)
         elif self.datatype == 'matrix':
-            for i in parsed:
-                print(i)
+            #for i in parsed:
+                #print(i)
             formatted = self._format_matrix(parsed)
         elif self.datatype == 'basis':
             formatted = self._format_basis(parsed)
