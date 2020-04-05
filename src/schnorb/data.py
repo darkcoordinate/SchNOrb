@@ -585,8 +585,7 @@ class OrcaOutputParser:
                 for parser in self.parsers:
                     self.parsers[parser].parse_line(line)
 
-        for i in self.parsers:
-            print(i)
+        print(self.parsers["hamiltonian"].parsed)
 
         self.parsed = {}
 
