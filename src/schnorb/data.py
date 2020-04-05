@@ -595,11 +595,11 @@ class OrcaOutputParser:
         for i in self.parsers["hamiltonian"].parsed:
             print(i)
         log("hamiltonian End")
-
-         log("hamiltonian")
+        
+        log("hamiltonian1")
         for i in self.parsers["hamiltonian1"].parsed:
             print(i)
-        log("hamiltonian End")
+        log("hamiltonian1 End")
         self.parsed = {}
 
         for parser in self.parsers:
