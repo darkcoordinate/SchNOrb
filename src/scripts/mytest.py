@@ -28,9 +28,9 @@ print(l)
 
 
 print(name[0])
-#k = data.OrcaDataParser()
+k = data.OrcaDataParser()
 
-#k.parse_file(name[0])
+k.parse_file(name[0])
 
 
 #s = data.OrcaHamiltonianParser("f1.db",l[0])

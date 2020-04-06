@@ -99,7 +99,6 @@ def extract_basis_definition_orca(output_files):
     for file in output_files:
         if os.path.exists(file) and os.path.splitext(file)[-1] == '.log':
             break
-    print(file)
 
     # Get ORCA geometry and basis set definition (list of ls per atom)
     basis_parser = OrcaDataParser(properties=['atoms', 'basis'])
@@ -260,7 +259,6 @@ class HamiltonianParser:
         distances = atoms.get_all_distances()
         min_dist = np.min(distances[distances != 0])
         if min_dist < self.min_dist:
-            print(self.min_dist)
             raise HamiltonianParserException(
                 'Distance of {:f} below threshold of {:f} detected.'.format(
                     min_dist, self.min_dist))
@@ -411,7 +409,6 @@ class AimsHamiltonianParser(HamiltonianParser):
 
         H = np.zeros((size, size))
         S = np.zeros((size, size))
-        print(H)
         H[mu, nu] = Hraw[:, 2]
         H[nu, mu] = Hraw[:, 2]
         S[mu, nu] = Sraw[:, 2]
