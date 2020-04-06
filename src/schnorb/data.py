@@ -99,6 +99,7 @@ def extract_basis_definition_orca(output_files):
     for file in output_files:
         if os.path.exists(file) and os.path.splitext(file)[-1] == '.log':
             break
+    print(file)
 
     # Get ORCA geometry and basis set definition (list of ls per atom)
     basis_parser = OrcaDataParser(properties=['atoms', 'basis'])
